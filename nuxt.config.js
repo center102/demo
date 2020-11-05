@@ -40,15 +40,29 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    // https://go.nuxtjs.dev/content
-    '@nuxt/content'
+    // https://auth.nuxtjs.org/
+    '@nuxtjs/auth'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
   axios: {},
 
-  // Content module configuration (https://go.nuxtjs.dev/config-content)
-  content: {},
+  // https://auth.nuxtjs.org/schemes/local.html#usage
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+          logout: { url: '/api/auth/logout', method: 'post' },
+          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+        }
+        // tokenRequired: true,
+        // tokenType: 'bearer',
+        // globalToken: true,
+        // autoFetchUser: true
+      }
+    }
+  },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
