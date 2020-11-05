@@ -3,16 +3,16 @@
     <div class="form-title">
       Login form
     </div>
-    <el-form ref="form" class="login-form" :model="form" label-width="120px">
+    <el-form ref="form" class="login-form" label-width="120px">
       <el-form-item label="Email">
-        <el-input v-model="form.email" />
+        <el-input v-model="email" />
       </el-form-item>
       <el-form-item label="Password">
-        <el-input v-model="form.password" />
+        <el-input v-model="password" />
       </el-form-item>
 
       <el-form-item>
-        <el-button type="primary" @click="onSubmit">
+        <el-button type="primary" @click="submit">
           Login
         </el-button>
         <el-button @click="gotoForgot">
@@ -24,25 +24,16 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
-
-export default Vue.extend({
+import {
+  defineComponent
+} from '@nuxtjs/composition-api'
+import { useCompLogin } from '@/compositions/login'
+export default defineComponent({
   layout: 'auth',
-  data () {
-    return {
-      form: {
-        email: '',
-        pass: ''
-      }
-    }
-  },
-  methods: {
-    onSubmit () {
-      this.$router.push('/')
-    },
-    gotoForgot () {
-      this.$router.push('forgot-password')
-    }
+  setup () {
+    const { email, password, submit, gotoForgot } = useCompLogin()
+
+    return { email, password, submit, gotoForgot }
   }
 })
 </script>
