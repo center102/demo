@@ -1,6 +1,7 @@
 import {
   ref,
-  useContext
+  useContext,
+  computed
 } from '@nuxtjs/composition-api'
 
 export const useCompLogin = () => {
@@ -12,9 +13,18 @@ export const useCompLogin = () => {
     console.log('password', password)
     router?.push('/')
   }
+  const info = computed(() => {
+    return email.value + ' ' + password.value
+  })
+
+  return { email, password, info, submit }
+}
+
+export const useCompLoginMethod = () => {
+  const { app: { router } } = useContext()
   const gotoForgot = () => {
     router?.push('forgot-password')
   }
 
-  return { email, password, submit, gotoForgot }
+  return { gotoForgot }
 }

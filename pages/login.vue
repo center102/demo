@@ -2,6 +2,9 @@
   <div class="container">
     <div class="form-title">
       Login form
+      <p>Email: {{ email }}</p>
+      <p>Pass: {{ password }}</p>
+      <p>Email + password: {{ info }}</p>
     </div>
     <el-form ref="form" class="login-form" label-width="120px">
       <el-form-item label="Email">
@@ -27,13 +30,14 @@
 import {
   defineComponent
 } from '@nuxtjs/composition-api'
-import { useCompLogin } from '@/compositions/login'
+import { useCompLogin, useCompLoginMethod } from '@/compositions/use-login'
 export default defineComponent({
   layout: 'auth',
   setup () {
-    const { email, password, submit, gotoForgot } = useCompLogin()
+    const { email, password, info, submit } = useCompLogin()
+    const { gotoForgot } = useCompLoginMethod()
 
-    return { email, password, submit, gotoForgot }
+    return { email, password, info, submit, gotoForgot }
   }
 })
 </script>
