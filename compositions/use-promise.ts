@@ -2,8 +2,8 @@ import { ref } from '@nuxtjs/composition-api'
 
 export const usePromise = (executeFunction: Function) => {
   const loading = ref(false)
-  const error = ref(null)
-  const results = ref(null)
+  const error = ref()
+  const results = ref()
   const createPromise = async (...args: any) => {
     try {
       loading.value = true

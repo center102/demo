@@ -7,11 +7,9 @@ import {
 export const useCompLogin = () => {
   const email = ref('')
   const password = ref('')
-  const { app: { router } } = useContext()
+  const { app: { $router } } = useContext()
   const submit = () => {
-    console.log('email', email)
-    console.log('password', password)
-    router?.push('/')
+    $router.push('/')
   }
   const info = computed(() => {
     return email.value + ' ' + password.value

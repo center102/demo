@@ -23,7 +23,9 @@ export default {
 
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/inject-log',
+    '@/plugins/inject-service'
   ],
 
   // Auto import components (https://go.nuxtjs.dev/config-components)
@@ -34,7 +36,9 @@ export default {
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
     // https://composition-api.nuxtjs.org/getting-started/setup
-    '@nuxtjs/composition-api'
+    '@nuxtjs/composition-api',
+    // https://nuxtjs.org/blog/moving-from-nuxtjs-dotenv-to-runtime-config/
+    '@nuxtjs/dotenv'
   ],
 
   // Modules (https://go.nuxtjs.dev/config-modules)
@@ -44,31 +48,46 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://auth.nuxtjs.org/
-    '@nuxtjs/auth'
+    // '@nuxtjs/auth',
+    '@nuxtjs/proxy'
   ],
 
   // Axios module configuration (https://go.nuxtjs.dev/config-axios)
-  axios: {},
+  axios: {
+    proxy: true,
+    proxyHeaders: false,
+    credentials: false
+  },
 
   // https://auth.nuxtjs.org/schemes/local.html#usage
-  auth: {
-    strategies: {
-      local: {
-        endpoints: {
-          login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
-          logout: { url: '/api/auth/logout', method: 'post' },
-          user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
-        }
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
-      }
-    }
-  },
+  // auth: {
+  //   strategies: {
+  //     local: {
+  //       endpoints: {
+  //         login: { url: '/api/auth/login', method: 'post', propertyName: 'token' },
+  //         logout: { url: '/api/auth/logout', method: 'post' },
+  //         user: { url: '/api/auth/user', method: 'get', propertyName: 'user' }
+  //       }
+  //       // tokenRequired: true,
+  //       // tokenType: 'bearer',
+  //       // globalToken: true,
+  //       // autoFetchUser: true
+  //     }
+  //   }
+  // },
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
     transpile: [/^element-ui/]
+  },
+
+  publicRuntimeConfig: {
+    axios: {
+      browserBaseURL: process.env.BROWSER_BASE_URL
+    }
+  },
+
+  server: {
+    port: 8080 // default: 3000
   }
 }

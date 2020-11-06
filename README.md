@@ -18,3 +18,5 @@ $ yarn generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+https://typescript.nuxtjs.org/cookbook/plugins.html#ii-inject-into-context
